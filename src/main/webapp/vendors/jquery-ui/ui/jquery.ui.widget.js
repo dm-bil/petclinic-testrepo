@@ -312,7 +312,7 @@ $.Widget.prototype = {
 				curOption = options[ key ] = $.widget.extend( {}, this.options[ key ] );
 				for ( i = 0; i < parts.length - 1; i++ ) {
 					curOption[ parts[ i ] ] = curOption[ parts[ i ] ] || {};
-					curOption = curOption[ parts[ i ] ];
+//					curOption = curOption[ parts[ i ] ];
 				}
 				key = parts.pop();
 				if ( arguments.length === 1 ) {
