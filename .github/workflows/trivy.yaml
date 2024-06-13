@@ -31,4 +31,4 @@ jobs:
       - name: "Read report contents"
         uses: andstor/file-reader-action@v1
         with:
-          path: "trivy-results.sarif"
+          path: "trivy-results.json"
