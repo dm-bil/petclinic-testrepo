@@ -24,4 +24,11 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'LOW'
-        
+          
+      - name: Read report
+        id: report
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./trivy-results.sarif
+      - name: Echo package.json
+        run: echo "${{ steps.report.outputs.content }}"
