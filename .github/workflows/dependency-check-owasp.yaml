@@ -32,3 +32,6 @@ jobs:
         uses: andstor/file-reader-action@v1
         with:
           path: "reports/dependency-check-report.json"
+
+      - name: Inspect action JSON report
+        run: cat reports/dependency-check-report.json
