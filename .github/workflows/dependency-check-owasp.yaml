@@ -1,0 +1,32 @@
+name: Run OWASP DC scan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+  schedule:
+    - cron: '41 5 * * 6'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run dependency-check scan
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'petclinic'
+          path: '.'
+          format: 'JSON'
+          out: 'reports' # this is the default, no need to specify unless you wish to override it
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+          
+      - name: Inspect action JSON report
+        run: ls -la reports
