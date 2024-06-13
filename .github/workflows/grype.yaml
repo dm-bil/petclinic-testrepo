@@ -1,0 +1,28 @@
+name: Run Trivy scan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+  schedule:
+    - cron: '48 5 * * 6'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Grype scan
+        uses: anchore/scan-action@v3
+        with:
+          path: "."
+          fail-build: false
+          output-format: "json"
+                
+      - name: Inspect action JSON report
+        run: cat ${{ steps.scan.outputs.json }}
