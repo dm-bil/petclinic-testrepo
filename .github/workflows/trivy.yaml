@@ -23,5 +23,6 @@ jobs:
           scan-type: 'fs'
           ignore-unfixed: false
           format: 'json'
+          output: 'trivy-scan.json'
           severity: 'LOW'
         
