@@ -15,23 +15,22 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: 'fs'
-          output: 'trivy-results.txt'
-      - name: Publish Trivy Output to Summary
+          ignore-unfixed: true
+          format: 'json'
+          output: 'trivy-results.json'
+          severity: 'LOW'
+
+      - name: Output results to stdout
         run: |
-          if [[ -s trivy.txt ]]; then
+          if [[ -s trivy-results.json ]]; then
             {
-              echo "### Security Output"
-              echo "<details><summary>Click to expand</summary>"
-              echo ""
-              echo '```terraform'
-              cat trivy.txt
-              echo '```'
-              echo "</details>"
+              cat trivy-results.json
             } >> $GITHUB_STEP_SUMMARY
           fi
+        
