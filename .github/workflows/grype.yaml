@@ -1,4 +1,4 @@
-name: Run Trivy scan
+name: Run Grype scan
 
 on:
   push:
