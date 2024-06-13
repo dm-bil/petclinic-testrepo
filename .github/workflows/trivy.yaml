@@ -22,7 +22,7 @@ jobs:
         with:
           scan-type: 'fs'
           ignore-unfixed: false
-          format: 'json'
-          output: 'trivy-scan.json'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
           severity: 'LOW'
         
