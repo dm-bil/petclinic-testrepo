@@ -22,15 +22,6 @@ jobs:
         with:
           scan-type: 'fs'
           ignore-unfixed: true
-          format: 'json'
-          output: 'trivy-results.json'
+          format: 'table'
           severity: 'LOW'
-
-      - name: Output results to stdout
-        run: |
-          if [[ -s trivy-results.json ]]; then
-            {
-              cat trivy-results.json
-            } >> $GITHUB_STEP_SUMMARY
-          fi
         
