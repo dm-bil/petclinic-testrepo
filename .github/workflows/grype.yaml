@@ -1,13 +1,15 @@
 name: Run Grype scan
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened]
-  schedule:
-    - cron: '48 5 * * 6'
+#on:
+#  push:
+#    branches:
+#      - master
+#  pull_request:
+#    types: [opened, synchronize, reopened]
+#  schedule:
+#    - cron: '48 5 * * 6'
+
+on: workflow_dispatch
 
 jobs:
   build:
@@ -25,8 +27,13 @@ jobs:
           fail-build: false
           output-format: "sarif"
                 
-      - name: Upload Test results
-        uses: actions/upload-artifact@master
+#      - name: Upload Test results
+#        uses: actions/upload-artifact@master
+#        with:
+#           name: Grype report
+#           path: ${{steps.scan.outputs.sarif}}
+
+      - name: Upload SARIF to GHAS
+        uses: github/codeql-action/upload-sarif@v2
         with:
-           name: Grype report
-           path: ${{steps.scan.outputs.sarif}}
+          sarif_file: ${{ steps.scan.outputs.sarif }}
