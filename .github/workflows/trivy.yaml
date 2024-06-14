@@ -30,13 +30,13 @@ jobs:
           output: 'trivy-results.sarif'
           severity: 'MEDIUM,HIGH,CRITICAL'
 
-#      - name: Upload Test results
-#        uses: actions/upload-artifact@master
-#        with:
-#           name: Trivy report
-#           path: ${{github.workspace}}/trivy-results.sarif
-
-      - name: Upload SARIF to GHAS
-        uses: github/codeql-action/upload-sarif@v2
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
         with:
-          sarif_file: ${{ github.workspace }}/trivy-results.sarif
+           name: Trivy report
+           path: ${{github.workspace}}/trivy-results.sarif
+
+#      - name: Upload SARIF to GHAS
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: ${{ github.workspace }}/trivy-results.sarif
