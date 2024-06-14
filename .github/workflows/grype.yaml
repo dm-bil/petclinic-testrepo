@@ -23,10 +23,10 @@ jobs:
         with:
           path: "."
           fail-build: false
-          output-format: "json"
+          output-format: "sarif"
                 
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
            name: Grype report
-           path: ${{steps.scan.outputs.json}}
+           path: ${{steps.scan.outputs.sarif}}
