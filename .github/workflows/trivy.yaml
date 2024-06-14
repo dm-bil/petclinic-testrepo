@@ -32,5 +32,5 @@ jobs:
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
-           name: Grype report
+           name: Trivy report
            path: ${{github.workspace}}/trivy-results.json
