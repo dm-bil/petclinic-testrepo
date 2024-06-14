@@ -36,5 +36,7 @@ jobs:
 #           name: Depcheck report
 #           path: ${{github.workspace}}/reports
 
-      - name: Inspect action SARIF report
-        run: ls -la ${{github.workspace}}/reports
+      - name: Upload SARIF to GHAS
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ github.workspace }}/reports/dependency-check-report.sarif
