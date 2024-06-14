@@ -24,7 +24,7 @@ jobs:
         with:
           scan-type: 'fs'
           vuln-type: 'library'
-          scanners: 'vuln'
+          scanners: 'secret'
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
