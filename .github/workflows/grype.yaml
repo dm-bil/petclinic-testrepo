@@ -25,5 +25,8 @@ jobs:
           fail-build: false
           output-format: "json"
                 
-      - name: Inspect action JSON report
-        run: cat ${{ steps.scan.outputs.json }}
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+           name: Depcheck report
+           path: ${{steps.scan.outputs.json}}
