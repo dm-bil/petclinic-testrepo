@@ -28,8 +28,9 @@ jobs:
           output: 'trivy-results.json'
           severity: 'MEDIUM,HIGH,CRITICAL'
           exit-code: '1'
-          
-      - name: "Read report contents"
-        uses: andstor/file-reader-action@v1
+
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
         with:
-          path: "trivy-results.json"
+           name: Grype report
+           path: ${{github.workspace}}/trivy-results.json
