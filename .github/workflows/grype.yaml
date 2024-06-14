@@ -28,5 +28,5 @@ jobs:
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
-           name: Depcheck report
+           name: Grype report
            path: ${{steps.scan.outputs.json}}
