@@ -33,7 +33,7 @@ jobs:
       - name: Upload SCA results
         uses: actions/upload-artifact@master
         with:
-           name: Trivy report
+           name: Trivy SCA report
            path: ${{github.workspace}}/trivy-results.sarif
 
       - name: Run Trivy to generate SBOM
@@ -46,7 +46,7 @@ jobs:
       - name: Upload SBOM results
         uses: actions/upload-artifact@master
         with:
-           name: Trivy report
+           name: Trivy SBOM report
            path: ${{github.workspace}}/trivy-results.sbom.json
 
 #      - name: Upload SARIF to GHAS
