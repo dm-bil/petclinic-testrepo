@@ -23,31 +23,31 @@ jobs:
         uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: 'fs'
-          vuln-type: 'library'
+#          vuln-type: 'library'
           scanners: 'secret'
-          ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'MEDIUM,HIGH,CRITICAL'
+#          ignore-unfixed: true
+#          format: 'sarif'
+#          output: 'trivy-results.sarif'
+#          severity: 'MEDIUM,HIGH,CRITICAL'
 
-      - name: Upload SCA results
-        uses: actions/upload-artifact@master
-        with:
-           name: Trivy SCA report
-           path: ${{github.workspace}}/trivy-results.sarif
+#      - name: Upload SCA results
+#        uses: actions/upload-artifact@master
+#        with:
+#           name: Trivy SCA report
+#           path: ${{github.workspace}}/trivy-results.sarif
 
-      - name: Run Trivy to generate SBOM
-        uses: aquasecurity/trivy-action@0.20.0
-        with:
-          scan-type: 'fs'
-          format: 'cyclonedx'
-          output: 'trivy-results.sbom.json'
+#      - name: Run Trivy to generate SBOM
+#        uses: aquasecurity/trivy-action@0.20.0
+#        with:
+#          scan-type: 'fs'
+#          format: 'cyclonedx'
+#          output: 'trivy-results.sbom.json'
 
-      - name: Upload SBOM results
-        uses: actions/upload-artifact@master
-        with:
-           name: Trivy SBOM report
-           path: ${{github.workspace}}/trivy-results.sbom.json
+#      - name: Upload SBOM results
+#        uses: actions/upload-artifact@master
+#        with:
+#           name: Trivy SBOM report
+#           path: ${{github.workspace}}/trivy-results.sbom.json
 
 #      - name: Upload SARIF to GHAS
 #        uses: github/codeql-action/upload-sarif@v2
