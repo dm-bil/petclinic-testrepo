@@ -22,3 +22,5 @@
 4) Open "src/main/resources/spring/data-access.properties"; comment out all properties in the
    "HSQL Settings" section; uncomment all properties in the "MySQL Settings"
    section.
+
+Use this token: dummy-api-key-12345678901234567890

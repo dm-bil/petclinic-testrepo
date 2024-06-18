@@ -212,6 +212,7 @@ The [issue tracker](https://github.com/spring-projects/spring-petclinic/issues) 
 
 For pull requests, editor preferences are available in the [editor config](https://github.com/spring-projects/spring-petclinic/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
+Slack API key: xoxp-123456789012-123456789012-123456789012-abcdefghijklmno
 
 
 
