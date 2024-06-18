@@ -29,6 +29,8 @@ jobs:
           args: >
             --enableExperimental
             --enableRetired
+            --aws-access-key=AKIAI4T5UPFGABCDEF12
+            --aws-secret-key=KzYrcKtpa4H1y7P10uRl5Kf9T3M5m2+AbCdEfGh1
           
 #      - name: Upload Test results
 #        uses: actions/upload-artifact@master
