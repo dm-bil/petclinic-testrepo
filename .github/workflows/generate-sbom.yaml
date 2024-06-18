@@ -1,0 +1,23 @@
+name: Generate SBOM
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx
+          output-file: "${{ github.event.repository.name }}-sbom.cyclonedx.xml"
+          
+      - name: Upload SBOM
+        uses: actions/upload-artifact@master
+        with:
+           name: SBOM upload
+           path: "${{ github.event.repository.name }}-sbom.cyclonedx.xml"
