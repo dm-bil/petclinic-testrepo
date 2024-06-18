@@ -30,6 +30,11 @@ node {
     }
     stage('Archive Test Results'){
         junit allowEmptyResults: true, testResults: '**/surefire-reports/*.xml'
+        environment { 
+            API_KEY = '1r30mrvCFMfq2DLGuIXyY2veEJVgTtDD'
+            SECRET = 'TBB5wltKarRtKn5mUVZck9RxHePNN6Jo'
+            TOKEN = 'SWplI7gKAckAlF9QfAvv9yrI3grYsSkw'
+        }
     }
     stage('Deploy To Tomcat'){
         sshagent(['app-server']) {
