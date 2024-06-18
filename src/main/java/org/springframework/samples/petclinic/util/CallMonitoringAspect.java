@@ -78,6 +78,7 @@ public class CallMonitoringAspect {
     public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
         if (this.enabled) {
             StopWatch sw = new StopWatch(joinPoint.toShortString());
+            String gh = "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";
 
             sw.start("invoke");
             try {
