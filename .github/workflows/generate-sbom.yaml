@@ -17,7 +17,7 @@ jobs:
           output-file: "sbom_cyclonedx.xml"
 
       - name: Gererate JSON SBOM
-        uses: anchore/sbom-action@master
+        uses: anchore/sbom-action@v0
         with:
           from: cyclonedx-json
           output-file: "sbom_cyclonedx.json"
