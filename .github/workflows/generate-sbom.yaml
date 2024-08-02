@@ -15,13 +15,14 @@ jobs:
         with:
           format: cyclonedx
           output-file: "sbom_cyclonedx.xml"
+          upload-artifact: false
 
       - name: Gererate JSON SBOM
         uses: anchore/sbom-action@v0
         with:
           format: cyclonedx-json
           output-file: "sbom_cyclonedx.json"
-
+          upload-artifact: false
 
       - name: Upload reports
         uses: actions/upload-artifact@master
