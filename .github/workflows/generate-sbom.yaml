@@ -13,13 +13,13 @@ jobs:
       - name: Gererate XML SBOM
         uses: anchore/sbom-action@v0
         with:
-          from: cyclonedx
+          format: cyclonedx
           output-file: "sbom_cyclonedx.xml"
 
       - name: Gererate JSON SBOM
         uses: anchore/sbom-action@v0
         with:
-          from: cyclonedx-json
+          format: cyclonedx-json
           output-file: "sbom_cyclonedx.json"
 
 
