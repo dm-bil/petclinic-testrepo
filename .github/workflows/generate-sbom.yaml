@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Gererate XML SBOM
-        uses: anchore/sbom-action@master
+        uses: anchore/sbom-action@v0
         with:
           from: cyclonedx
           output-file: "sbom_cyclonedx.xml"
