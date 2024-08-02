@@ -1,0 +1,27 @@
+name: TruffleHog Diff Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: master
+  workflow_dispatch: 
+  schedule:
+    - cron: "0 15 * * 2"
+
+jobs:
+  trufflehog:
+    name: trufflehog/scan
+    runs-on: ubuntu-latest
+    container:
+      image: trufflesecurity/trufflehog
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run TruffleHog fullscan
+        run: trufflehog filesystem . --no-fail -x .truffleignore | tee trufflehog_scan.txt
+      
+      - name: Upload reports
+        uses: actions/upload-artifact@master
+        with:
+           name: ${{ github.event.repository.name }} TruffleHog Scan report
+           path: ${{ github.workspace }}/trufflehog_scan.*
