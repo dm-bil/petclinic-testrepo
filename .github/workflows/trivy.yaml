@@ -1,55 +1,35 @@
 name: Run Trivy scan
 
-#on:
-#  push:
-#    branches:
-#      - master
-#  pull_request:
-#    types: [opened, synchronize, reopened]
-#  schedule:
-#    - cron: '41 5 * * 6'
-
-on: workflow_dispatch
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: master
+    workflow_dispatch: 
+  schedule:
+    - cron: "0 20 * * 2"
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
+  trivy:
+    name: trivy/depcheck
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@0.20.0
+      - name: Run Trivy Dependency scan
+        uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          vuln-type: 'library'
-          scanners: 'vuln'
+          scan-type: "fs"
+          vuln-type: "library"
+          scanners: "vuln"
           ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'MEDIUM,HIGH,CRITICAL'
+          format: "table"
+          output: "trivy_scan.txt"
+          severity: "MEDIUM,HIGH,CRITICAL"
+          trivyignores: ".trivyignore.yaml"
 
-      - name: Upload SCA results
+
+      - name: Upload reports
         uses: actions/upload-artifact@master
         with:
-           name: Trivy SCA report
-           path: ${{github.workspace}}/trivy-results.sarif
-
-#      - name: Run Trivy to generate SBOM
-#        uses: aquasecurity/trivy-action@0.20.0
-#        with:
-#          scan-type: 'fs'
-#          format: 'cyclonedx'
-#          output: 'trivy-results.sbom.json'
-
-#      - name: Upload SBOM results
-#        uses: actions/upload-artifact@master
-#        with:
-#           name: Trivy SBOM report
-#           path: ${{github.workspace}}/trivy-results.sbom.json
-
-#      - name: Upload SARIF to GHAS
-#        uses: github/codeql-action/upload-sarif@v2
-#        with:
-#          sarif_file: ${{ github.workspace }}/trivy-results.sarif
+           name: ${{ github.event.repository.name }} Trivy Scan report
+           path: ${{ github.workspace }}/trivy_scan.*
