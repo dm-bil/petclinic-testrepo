@@ -1,4 +1,4 @@
-name: Run Trivy scan
+name: Trivy scan
 
 on:
   pull_request:
@@ -12,22 +12,14 @@ jobs:
   trivy:
     name: trivy/depcheck
     runs-on: ubuntu-latest
+    container:
+      image: aquasecurity/trivy
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Trivy Dependency scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: "fs"
-          vuln-type: "library"
-          scanners: "vuln"
-          ignore-unfixed: true
-          format: "table"
-          output: "trivy_scan.txt"
-          severity: "MEDIUM,HIGH,CRITICAL"
-          trivyignores: ".trivyignore.yaml"
-
-
+      - name: Run Trivy fullscan
+        run: trivy fs --vuln-type library --scanners vuln --ignore-unfixed --format table --output trivy_scan.txt --severity MEDIUM,HIGH,CRITICAL --ignorefile .trivyignore.yaml --dependency-tree .
+      
       - name: Upload reports
         uses: actions/upload-artifact@master
         with:
