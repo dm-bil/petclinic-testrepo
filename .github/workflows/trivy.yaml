@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Trivy fullscan
-        run: trivy fs --vuln-type library --scanners vuln --ignore-unfixed --format table --output trivy_scan.txt --severity MEDIUM,HIGH,CRITICAL --ignorefile .trivyignore.yaml --dependency-tree .
+        run: trivy fs --pkg-types library --scanners vuln --ignore-unfixed --format table --output trivy_scan.txt --severity MEDIUM,HIGH,CRITICAL --ignorefile .trivyignore.yaml --dependency-tree .
       
       - name: Upload reports
         uses: actions/upload-artifact@master
