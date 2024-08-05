@@ -13,7 +13,7 @@ jobs:
     name: trivy/depcheck
     runs-on: ubuntu-latest
     container:
-      image: aquasecurity/trivy
+      image: aquasec/trivy
     steps:
       - uses: actions/checkout@v4
 
