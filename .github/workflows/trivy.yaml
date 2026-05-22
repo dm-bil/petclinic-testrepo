@@ -33,5 +33,5 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.sarifReportPaths=results.sarif
-            -Dsonar.sources=${{ github.workspace }}/trivy_scan.sarif
+            -Dsonar.sarifReportPaths=trivy_scan.sarif
+            -Dsonar.sources=.
