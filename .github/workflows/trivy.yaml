@@ -23,10 +23,22 @@ jobs:
       - name: Upload reports
         uses: actions/upload-artifact@master
         with:
-           name: ${{ github.event.repository.name }} Trivy Scan report
-           path: ${{ github.workspace }}/trivy_scan.*
+           name: trivy-sarif
+           path: trivy_scan.sarif
 
-      - name: Import Sarif to Sonar
+  sonar-import:
+    name: Import to SonarQube
+    runs-on: ubuntu-latest
+    needs: trivy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download SARIF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: trivy-sarif
+
+      - name: Import SARIF to SonarQube
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
