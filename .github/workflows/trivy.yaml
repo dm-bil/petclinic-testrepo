@@ -25,3 +25,13 @@ jobs:
         with:
            name: ${{ github.event.repository.name }} Trivy Scan report
            path: ${{ github.workspace }}/trivy_scan.*
+
+      - name: Import Sarif to Sonar
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.sarifReportPaths=results.sarif
+            -Dsonar.sources=${{ github.workspace }}/trivy_scan.sarif
